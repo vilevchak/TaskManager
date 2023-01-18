@@ -26,11 +26,9 @@ RUN apt-get update -qq \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && truncate -s 0 /var/log/*log
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py > get-poetry.py \
-    && python get-poetry.py --version 1.1.7 \
-    && rm get-poetry.py
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
-ENV PATH $PATH:/root/.poetry/bin
+ENV PATH="${PATH}:/root/.local/bin"
 
 RUN poetry config virtualenvs.create false
 ENV PATH $PATH:/root/.poetry/bin
